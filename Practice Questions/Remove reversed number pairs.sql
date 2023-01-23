@@ -1,5 +1,7 @@
+/*
 Problem statement: Remove all reversed number pairs from given table, keep only one (random)
 Question link: https://youtu.be/LJuGi0VRCA0
+*/
 
 -- Creating the dataset
 CREATE TABLE number_pairs(A INT, B INT);
@@ -30,7 +32,9 @@ SELECT A, B
 FROM T1
 WHERE CONCAT(A,B) NOT IN (SELECT CONCAT(B,A) FROM T1 AS inside WHERE T1.rn < inside.rn);
 /* 
-This code selects the "A" and "B" columns from "T1" table, and only returns rows where the combination of "A" and "B" is not found in the combination of "B" and "A" in any other row below the current row. */
+This code selects the "A" and "B" columns from "T1" table, 
+and only returns rows where the combination of "A" and "B" is not found in the combination of "B" and "A" in any other row below the current row. 
+*/
 
 -- Output
 +------+------+
