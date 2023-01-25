@@ -27,3 +27,19 @@ SELECT * FROM marks;
 
 -- Solution:
 
+-- Used SUM() to aggregate the values for each student_id & avoid 0 value. MAX() can also be used
+SELECT DISTINCT id AS student_id,
+SUM(CASE WHEN subject = 'English' THEN marks ELSE 0 END) AS 'English',
+SUM(CASE WHEN subject = 'Science' THEN marks ELSE 0 END) AS 'Science',
+SUM(CASE WHEN subject = 'Maths' THEN marks ELSE 0 END) AS 'Maths'
+FROM marks
+GROUP BY 1;
+
+-- Output:
+
++------------+---------+---------+-------+
+| student_id | English | Science | Maths |
++------------+---------+---------+-------+
+|       1001 |      88 |      90 |    85 |
+|       1002 |      70 |      80 |    83 |
++------------+---------+---------+-------+
