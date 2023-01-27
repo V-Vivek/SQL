@@ -28,3 +28,9 @@ SELECT * FROM user_act;
 +------------+---------+----------+
 
 -- Solution:
+
+WITH T1 AS
+(
+  SELECT *
+  FROM user_act
+)
