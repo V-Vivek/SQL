@@ -31,6 +31,7 @@ SELECT * FROM user_act;
 
 WITH T1 AS
 (
-  SELECT *
+  SELECT tra_dt, user_id
   FROM user_act
 )
+SELECT * FROM T1;
