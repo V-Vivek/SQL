@@ -31,7 +31,26 @@ SELECT * FROM user_act;
 
 WITH T1 AS
 (
-  SELECT tra_dt, user_id
-  FROM user_act
+	SELECT tra_dt, user_id,
+	ROW_NUMBER() OVER(ORDER BY tra_dt) AS row_num
+    FROM user_act
+),
+T2 AS
+(
+	SELECT tra_dt, 
+	CASE WHEN NOT EXISTS (SELECT 1 FROM T1 a WHERE a.row_num < b.row_num AND a.user_id = b.user_id) THEN 1 ELSE 0 END AS valid
+	FROM T1 AS b
 )
-SELECT * FROM T1;
+SELECT tra_dt, SUM(valid) AS unique_user_count
+FROM T2
+GROUP BY tra_dt;
+
+-- Output:
+
++------------+-------------------+
+| tra_dt     | unique_user_count |
++------------+-------------------+
+| 2022-02-20 |                 2 |
+| 2022-02-22 |                 1 |
+| 2022-02-24 |                 0 |
++------------+-------------------+
