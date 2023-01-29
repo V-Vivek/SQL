@@ -27,7 +27,7 @@ SELECT * FROM user_act;
 | 2022-02-24 |       3 | abc      |
 +------------+---------+----------+
 
--- Solution:
+-- Solution #1:
 
 WITH T1 AS
 (
@@ -44,6 +44,18 @@ T2 AS
 SELECT tra_dt, SUM(valid) AS unique_user_count
 FROM T2
 GROUP BY tra_dt;
+
+-- Solution #2:
+
+WITH T1 AS
+(
+	SELECT tra_dt, user_id,
+	ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY tra_dt) AS row_num
+	FROM user_act
+)
+SELECT u.tra_dt, COUNT(T1.row_num)
+FROM user_act u LEFT JOIN T1 ON T1.row_num = 1 AND u.tra_dt = T1.tra_dt AND u.user_id =  T1.user_id
+GROUP BY 1;
 
 -- Output:
 
