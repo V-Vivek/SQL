@@ -58,7 +58,8 @@ WHERE o.customer_id IS NOT NULL AND c.customer_name = 'Shashank';
 - EXISTS stopsexecution as soon as it finds the 1st entry for 'Shashank'
 ```
 SELECT c.*
-FROM customers c WHERE EXISTS (SELECT order_id FROM orders o WHERE c.customer_id = o.customer_id AND c.customer_name = 'Shashank');
+FROM customers c
+WHERE EXISTS (SELECT order_id FROM orders o WHERE c.customer_id = o.customer_id AND c.customer_name = 'Shashank');
 +-------------+---------------+----------------+
 | customer_id | customer_name | customer_email |
 +-------------+---------------+----------------+
