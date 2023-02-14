@@ -30,4 +30,16 @@
 ## |
 - OR(|) matches any of the patterns p1, p2, or p3 (p1|p2|p3)
 - Gives all the names containing ‘be’ or ‘ae’.Example – Abel, Baer.  
-- ```SELECT name FROM student_tbl WHERE name REGEXP 'be|ae' ;```
+```SELECT name FROM student_tbl WHERE name REGEXP 'be|ae' ;```
+
+## .
+- Matches any single character except a newline character. 
+- e.g. The regular expression would match "bat", "bet", "bit", or "but".  
+```SELECT name FROM student_tbl WHERE name REGEXP 'b.t' ;```
+
+## {}
+- Used to specify the exact number of times a character or group should be repeated.
+- e.g. The regular expression ```a{3}``` would match "aaa", but not "aa" or "aaaa". 
+- The regular expression ```a{3,}``` would match "aaa", "aaaa", "aaaaa", and so on. 
+- The regular expression ```a{3,5}``` would match "aaa", "aaaa", or "aaaaa", but not "aa" or "aaaaaaaa".
+
