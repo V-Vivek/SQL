@@ -8,6 +8,19 @@
 - e.g. Gives all the names ending with ‘on’.Example – norton, merton.  
 ```SELECT name FROM student_tbl WHERE name REGEXP 'on$';```
 
+## .
+- Matches any single character except a newline character. 
+- e.g. The regular expression would match "bat", "bet", "bit", or "but".  
+```SELECT name FROM student_tbl WHERE name REGEXP 'b.t' ;```
+
+## *
+- Matches zero or more occurrences of the preceding character or group. 
+- e.g. The regular expression ```ab*c``` would match "ac", "abc", "abbc", "abbbc", and so on.
+
+## +
+- Matches one or more occurrences of the preceding character or group. 
+- e.g. The regular expression ```ab+c``` would match "abc", "abbc", "abbbc", and so on, but not "ac".
+
 ## ? 
 - Matches zero or one occurrence of the preceding character or group. 
 ### Matching single character
@@ -31,11 +44,6 @@
 - OR(|) matches any of the patterns p1, p2, or p3 (p1|p2|p3)
 - Gives all the names containing ‘be’ or ‘ae’.Example – Abel, Baer.  
 ```SELECT name FROM student_tbl WHERE name REGEXP 'be|ae' ;```
-
-## .
-- Matches any single character except a newline character. 
-- e.g. The regular expression would match "bat", "bet", "bit", or "but".  
-```SELECT name FROM student_tbl WHERE name REGEXP 'b.t' ;```
 
 ## {}
 - Used to specify the exact number of times a character or group should be repeated.
