@@ -35,10 +35,55 @@ WITH RECURSIVE T1 AS
 (
   -- Anchor member
   SELECT 1 AS n
+  
   UNION
+  
   -- Recursive member
   SELECT n+1 FROM T1 WHERE n<10
 )
 SELECT * FROM T1;
 ```
 
+# Example #2
+- Write an SQL query to generate the hierarchy of employees
+```
+Employees Table:
++----+-------+------------+
+| id | name  | manager_id |
++----+-------+------------+
+|  1 | John  |       NULL |
+|  2 | Mike  |          1 |
+|  3 | Sara  |          1 |
+|  4 | Bob   |          2 |
+|  5 | Alice |          3 |
+|  6 | Dave  |          3 |
+|  7 | Tom   |          4 |
+|  8 | Kate  |          4 |
+|  9 | Amy   |          5 |
+| 10 | Jenny |          6 |
++----+-------+------------+
+```
+
+## Solution
+```
+WITH RECURSIVE employee_hierarchy AS
+(
+  -- Anchor member
+  SELECT id, name, manager_id, 0 AS level
+  FROM employees
+  WHERE manager_id IS NULL
+
+  UNION ALL
+
+  -- Recursive member
+  SELECT e.id, e.name, e.manager_id, eh.level + 1
+  FROM employees e JOIN employee_hierarchy eh 
+  ON e.manager_id = eh.id
+)
+SELECT *
+FROM employee_hierarchy
+ORDER BY level, name;
+```
+- In this example, the Anchor member selects the top-level employees (i.e., those with a NULL value in the "manager_id" column)
+- The Recursive member joins the "employees" table to the CTE to select the employees who report to each manager.
+- The "level" column is used to track the depth of each employee in the hierarchy.
