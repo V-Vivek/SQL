@@ -55,7 +55,7 @@ WHERE o.customer_id IS NOT NULL AND c.customer_name = 'Shashank';
 ```
 
 ## Using EXISTS
-- EXISTS stopsexecution as soon as it finds the 1st entry for 'Shashank'
+- EXISTS stops execution as soon as it finds the 1st entry for 'Shashank'
 ```
 SELECT c.*
 FROM customers c
